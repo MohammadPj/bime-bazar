@@ -10,7 +10,7 @@ interface RootLayoutClientProps {
 
 const client = new QueryClient();
 
-const RootLayoutClient: FC<RootLayoutClientProps> = ({ children }) => {
+const Providers: FC<RootLayoutClientProps> = ({ children }) => {
   return (
     <AppTheme>
       <CssBaseline />
@@ -25,4 +25,4 @@ const RootLayoutClient: FC<RootLayoutClientProps> = ({ children }) => {
   );
 };
 
-export default RootLayoutClient;
+export default Providers;

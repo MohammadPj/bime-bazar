@@ -1,7 +1,7 @@
 import { TypographyOptions } from "@mui/material/styles/createTypography"
 
 export const typography: TypographyOptions = {
-  fontFamily: "estedad",
+  fontFamily: "var(--font-vazir-matn)",
   allVariants: {
     color: "black",
   },
