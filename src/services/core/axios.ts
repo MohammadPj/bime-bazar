@@ -12,16 +12,16 @@ declare module '@tanstack/react-query' {
   }
 }
 
-const api: AxiosInstance = axios.create({
+const http: AxiosInstance = axios.create({
   baseURL: process.env.NEXT_PUBLIC_BASE_URL || 'api',
   timeout: 4000 * 10,
   withCredentials: true,
 })
 
-api.interceptors.response.use(
+http.interceptors.response.use(
   (response: AxiosResponse) => {
-    return response?.data?.data
+    return response?.data
   },
 )
 
-export default api
+export default http
