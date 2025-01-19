@@ -33,6 +33,7 @@ const InsuranceDetail: FC<InsuranceDetailProps> = () => {
       <Stack gap={2} width={"100%"} px={10}>
         {insuranceInfo.map((info) => (
           <Box
+            key={info.value}
             display={"flex"}
             width={"100%"}
             justifyContent={"space-between"}
