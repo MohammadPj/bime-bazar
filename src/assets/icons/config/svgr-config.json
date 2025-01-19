@@ -1,0 +1,14 @@
+{
+  "typescript": true,
+  "dimensions": false,
+  "replaceAttrValues": {
+    "white": "{color || 'white'}",
+    "#fff": "{color || 'white'}",
+    "#C2C2C2": "{color || '#C2C2C2'}"
+  },
+  "svgProps": {
+    "style": "{style}",
+    "width": "100%",
+    "height": "100%"
+  }
+}

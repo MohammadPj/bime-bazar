@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "icons:create": "npx @svgr/cli --typescript -d ./src/assets/icons/output ./src/assets/icons/source --config-file ./src/assets/icons/config/svgr-config.json --template src/assets/icons/config/svg-template.cjs"
   },
   "dependencies": {
     "@emotion/cache": "^11.14.0",
@@ -29,6 +30,6 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.1.4",
-    "typescript": "^5.7.2"
+    "typescript": "5.4.5"
   }
 }
