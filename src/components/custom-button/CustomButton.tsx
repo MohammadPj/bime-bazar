@@ -10,7 +10,7 @@ const CustomButton: FC<CustomButtonProps> = ({
   isLoading,
   children,
   disabled,
-  variant,
+  variant = "contained",
   ...props
 }) => {
   return (
@@ -28,13 +28,14 @@ const CustomButton: FC<CustomButtonProps> = ({
           ""
         )
       }
+      {...props}
       sx={{
         backgroundColor:
           variant === "contained" && isLoading ? "#ACACAC !important" : "",
         color: variant === "contained" && isLoading ? "#525252 !important" : "",
+        ...props.sx
       }}
       variant={variant}
-      {...props}
     >
       {children}
     </Button>
