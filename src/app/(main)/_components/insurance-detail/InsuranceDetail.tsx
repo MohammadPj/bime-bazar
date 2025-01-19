@@ -18,7 +18,6 @@ const InsuranceDetail: FC<InsuranceDetailProps> = () => {
 
   return (
     <Stack gap={6} alignItems={"center"} pb={8}>
-      <CustomHeader title={"مشخصات بیمه نامه"} />
 
       <CarLicencePlateView
         width={280}

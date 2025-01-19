@@ -9,4 +9,10 @@ export const getMyAddresses = (): Promise<IGetMyAddresses[]> =>
   http.get(commonRoutes.myAddresses);
 
 export const orderCompletion = (body: IOrderCompletionBody): Promise<any> =>
-  http.post(commonRoutes.orderCompletion, body);
+  http.post(commonRoutes.orderCompletion, body, {
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      // "Transfer-Encoding": "chunked",
+      // "Connection": "keep-alive"
+    },
+  });

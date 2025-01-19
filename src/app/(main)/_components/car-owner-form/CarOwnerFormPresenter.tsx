@@ -28,7 +28,11 @@ const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
     mutateOrderCompletion(values, {
       onError: () => {
         handleChangeDrawer('try-again');
+        handleChangeDrawer(undefined)
       },
+      onSuccess: () => {
+        router.push("/success-submit-insurance")
+      }
     });
   };
 

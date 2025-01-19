@@ -53,7 +53,6 @@ const CarOwnerForm: FC<CarOwnerInformationProps> = ({ form }) => {
 
   return (
     <Stack gap={6}>
-      <CustomHeader title={"مشخصات مالک خودرو"} />
 
       <Stack width={"100%"} px={5}>
         <Typography fontSize={16} fontWeight={500} mb={2}>
