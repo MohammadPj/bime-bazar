@@ -5,6 +5,8 @@ import { breakpoints } from "./breakpoints"
 import {MuiOutlinedInput} from "@/theme/components/textfield/MuiOutlinedInput";
 import {palette} from "@/theme/palette/palette";
 import {MuiButton} from "@/theme/components/button/MuiButton";
+import {MuiIconButton} from "@/theme/components/button/MuiIconButton";
+import {MuiRadio} from "@/theme/components/radio/MuiRadio";
 
 export const theme = createTheme({
   direction: 'rtl',
@@ -14,7 +16,9 @@ export const theme = createTheme({
   palette: palette,
   components: {
     MuiOutlinedInput,
-    MuiButton
+    MuiButton,
+    MuiIconButton,
+    MuiRadio
   }
 })
 

@@ -94,7 +94,7 @@ const UFTextField: FC<Props> = ({
           aria-readonly={readonly}
           disabled={disabled}
           slotProps={{
-            formHelperText: { style: { margin: "4px 0 0 0", fontSize: 14 } },
+            formHelperText: { style: { margin: "4px 0", fontSize: 14, height: 20 } },
             input: {
               readOnly: readonly,
               startAdornment: startIcon ? (
