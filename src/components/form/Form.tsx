@@ -67,14 +67,13 @@ const Form: FC<FormProps> = ({
           position={"relative"}
           {...deepMerge(gridItemProps, inputProp.gridItemProp)}
         >
-          {inputLabelMode === "static" && inputProp.type !== "checkbox" && (
+          {inputLabelMode === "static" && (
             <Box display={"flex"}>
               <Typography
                 flexGrow={1}
                 width={0}
                 component={"label"}
                 display={"inline-block"}
-                mb={2}
                 htmlFor={inputProp.name}
                 color={
                   result(form?.formState?.errors, `${inputProp.name}`)

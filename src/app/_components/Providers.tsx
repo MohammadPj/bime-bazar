@@ -1,7 +1,7 @@
 "use client";
 import React, { FC, ReactNode } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Box, CssBaseline } from "@mui/material";
+import {Box, CssBaseline, Stack} from "@mui/material";
 import AppTheme from "@/theme/AppTheme";
 
 interface RootLayoutClientProps {
@@ -14,13 +14,13 @@ const Providers: FC<RootLayoutClientProps> = ({ children }) => {
   return (
     <AppTheme>
       <CssBaseline />
-      <Box
+      <Stack
         sx={{
-          minHeight: "100vh",
+          minHeight: "100dvh",
         }}
       >
         <QueryClientProvider client={client}>{children}</QueryClientProvider>
-      </Box>
+      </Stack>
     </AppTheme>
   );
 };

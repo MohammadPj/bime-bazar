@@ -1,22 +1,5 @@
-export const validateNationalCode2 = (code: string) => {
-  if (!/^\d{10}$/.test(code)) return "کد ملی باید 10 رقم باشد و فقط عدد باشد.";
-
-  const checkDigit = parseInt(code[9], 10);
-  const sum = code
-    .split("")
-    .slice(0, 9)
-    .reduce((acc, digit, index) => acc + parseInt(digit, 10) * (10 - index), 0);
-
-  const remainder = sum % 11;
-    console.log('run')
-  if ((remainder < 2 && checkDigit !== remainder) || (remainder >= 2 && checkDigit !== 11 - remainder)) {
-    return "کدملی وارد شده معتبر نیست.";
-  }
-  return true;
-};
-
-export const validateNationalCode = code => {
-  if (code.length !== 10 || /(\d)(\1){9}/.test(code)) return "کد ملی باید 10 رقم باشد و فقط عدد باشد.";
+export const validateNationalCode = (code: string) => {
+  if (code.length !== 10 || /(\d)(\1){9}/.test(code)) return "کدملی وارد شده معتبر نیست.";
 
   let sum = 0,
     chars = code.split(''),

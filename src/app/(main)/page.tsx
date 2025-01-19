@@ -1,12 +1,14 @@
-import { Container, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import InsuranceDetail from "@/app/(main)/_components/insurance-detail/InsuranceDetail";
-import CarOwnerInformation from "@/app/(main)/_components/car-owner-information/CarOwnerInformation";
+import CarOwnerFormPresenter from "@/app/(main)/_components/car-owner-form/CarOwnerFormPresenter";
 
 export default function Home() {
+
   return (
-    <Stack>
+    <Stack height={"100%"} pb={6} minHeight={"100dvh"}>
       <InsuranceDetail />
-      <CarOwnerInformation />
+
+      <CarOwnerFormPresenter />
     </Stack>
   );
 }
