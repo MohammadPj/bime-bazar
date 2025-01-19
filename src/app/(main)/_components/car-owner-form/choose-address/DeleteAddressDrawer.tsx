@@ -23,8 +23,7 @@ const DeleteAddressDrawer: FC<DeleteAddressDrawerProps> = ({
   onConfirm,
 }) => {
   return (
-    <CustomDrawer
-      name={"delete-modal"}
+    <SwipeableDrawer
       anchor={"bottom"}
       open={isOpen}
       onClose={onClose}
@@ -87,7 +86,7 @@ const DeleteAddressDrawer: FC<DeleteAddressDrawerProps> = ({
           </CustomButton>
         </Box>
       </Stack>
-    </CustomDrawer>
+    </SwipeableDrawer>
   );
 };
 

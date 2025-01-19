@@ -22,13 +22,6 @@ const CustomDrawer: FC<CustomDrawerProps> = ({
 
   const params = new URLSearchParams(searchParams);
 
-  const handleClose = () => {
-    router.back();
-    if (onClose) {
-      onClose();
-    }
-  };
-
   useEffect(() => {
     if (open) {
       console.log("on open");
@@ -42,6 +35,23 @@ const CustomDrawer: FC<CustomDrawerProps> = ({
       };
     }
   }, [open]);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      onClose()
+    }
+
+    window.addEventListener("popstate", handlePopState)
+
+    return () => {
+      window.removeEventListener("popstate", handlePopState)
+    }
+  }, []);
+
+  // useEffect(() => {
+  //   console.log('close')
+  //   onClose()
+  // }, [pathname]);
 
   return (
     <SwipeableDrawer

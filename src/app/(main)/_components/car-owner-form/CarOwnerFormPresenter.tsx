@@ -9,11 +9,17 @@ import CustomButton from "@/components/custom-button/CustomButton";
 import { useOrderCompletionMutation } from "@/services/api/common/hooks";
 import Typography from "@mui/material/Typography";
 import CustomDrawer from "@/components/custom-drawer/CustomDrawer";
+import {usePathname, useRouter, useSearchParams} from "next/navigation";
 
 interface CarOwnerFormPresenterProps {}
 
+type TOpenDrawers = "try-again"
 const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
-  const [isOpen, setIsOpen] = useState<boolean>();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+  const params = new URLSearchParams(searchParams);
+
   const { mutate: mutateOrderCompletion, isPending } =
     useOrderCompletionMutation();
   const form = useForm<ICarOwnerForm>();
@@ -21,9 +27,18 @@ const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
   const handleSubmit = (values: ICarOwnerForm) => {
     mutateOrderCompletion(values, {
       onError: () => {
-        setIsOpen(true);
+        handleChangeDrawer('try-again');
       },
     });
+  };
+
+  const handleChangeDrawer = (modal?: TOpenDrawers) => {
+    if (modal) {
+      params.set("modal", modal);
+    } else {
+      params.delete("modal");
+    }
+    router.push(`${pathname}?${params?.toString()}`);
   };
 
   return (
@@ -48,9 +63,9 @@ const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
 
       <CustomDrawer
         name={'try-again'}
-        open={isOpen}
-        onClose={() => setIsOpen(false)}
-        onOpen={() => setIsOpen(true)}
+        open={searchParams.get("modal") === "try-again"}
+        onClose={() => handleChangeDrawer(undefined)}
+        onOpen={() => handleChangeDrawer('try-again')}
       >
         <Stack px={3} pt={3}>
           <Typography fontSize={14} fontWeight={500}>
@@ -74,7 +89,7 @@ const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
               sx={{ flexGrow: 1, width: 0 }}
               color={"secondary"}
               variant={"outlined"}
-              onClick={() => setIsOpen(false)}
+              onClick={() => handleChangeDrawer(undefined)}
               disabled={isPending}
             >
               بازگشت

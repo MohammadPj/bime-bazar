@@ -11,7 +11,7 @@ import Radio from "@mui/material/Radio";
 import ChooseAddressSkeleton from "@/app/(main)/_components/car-owner-form/choose-address/ChooseAddressSkeleton";
 import DeleteAddressDrawer from "@/app/(main)/_components/car-owner-form/choose-address/DeleteAddressDrawer";
 import { IGetMyAddresses } from "@/services/api/common/types";
-import CustomDrawer from "@/components/custom-drawer/CustomDrawer";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 interface ChooseAddressProps {
   onSubmit: (addressId: string) => void;
@@ -20,10 +20,14 @@ interface ChooseAddressProps {
 type TOpenDrawers = "choose-address" | "delete";
 const ChooseAddressDrawer: FC<ChooseAddressProps> = ({ onSubmit }) => {
   const QC = useQueryClient();
+  const searchParams = useSearchParams();
+  const pathname = usePathname();
+  const router = useRouter();
+
+  const params = new URLSearchParams(searchParams);
 
   const { data: myAddresses, isLoading } = useGetMyAddresses();
 
-  const [isOpen, setIsOpen] = useState<TOpenDrawers>();
   const [selectedAddressId, setSelectedAddressId] = React.useState<string>("");
   const [selectedAddress, setSelectedAddress] = useState<IGetMyAddresses>();
 
@@ -36,32 +40,40 @@ const ChooseAddressDrawer: FC<ChooseAddressProps> = ({ onSubmit }) => {
       (address) => address.id !== addressId,
     );
 
-    setIsOpen("choose-address");
+    handleChangeDrawer("choose-address");
     QC.setQueryData(["my-addresses"], newAddressList);
   };
 
   const handleClickDelete = (address: IGetMyAddresses) => {
     setSelectedAddress(address);
-    setIsOpen("delete");
+    handleChangeDrawer("delete");
   };
 
   const handleSubmit = () => {
     onSubmit(selectedAddressId!);
-    setIsOpen(undefined);
+    handleChangeDrawer(undefined);
+  };
+
+  const handleChangeDrawer = (modal?: TOpenDrawers) => {
+    if (modal) {
+      params.set("modal", modal);
+    } else {
+      params.delete("modal");
+    }
+    router.push(`${pathname}?${params?.toString()}`);
   };
 
   return (
     <>
-      <CustomButton fullWidth onClick={() => setIsOpen("choose-address")}>
+      <CustomButton fullWidth onClick={() => handleChangeDrawer("choose-address")}>
         انتخاب از آدرس های من
       </CustomButton>
 
-      <CustomDrawer
-        name={'choose-address'}
+      <SwipeableDrawer
         anchor={"bottom"}
-        open={isOpen === "choose-address"}
-        onClose={() => setIsOpen(undefined)}
-        onOpen={() => setIsOpen("choose-address")}
+        open={searchParams.get("modal") === "choose-address"}
+        onClose={() => handleChangeDrawer(undefined)}
+        onOpen={() => handleChangeDrawer("choose-address")}
       >
         <Stack gap={2}>
           <Box
@@ -76,7 +88,7 @@ const ChooseAddressDrawer: FC<ChooseAddressProps> = ({ onSubmit }) => {
               انتخاب آدرس
             </Typography>
 
-            <IconButton onClick={() => setIsOpen(undefined)}>
+            <IconButton onClick={() => handleChangeDrawer(undefined)}>
               <SvgCloseIcon width={14} height={14} />
             </IconButton>
           </Box>
@@ -138,12 +150,12 @@ const ChooseAddressDrawer: FC<ChooseAddressProps> = ({ onSubmit }) => {
             </CustomButton>
           </Box>
         </Stack>
-      </CustomDrawer>
+      </SwipeableDrawer>
 
       <DeleteAddressDrawer
-        isOpen={isOpen === "delete"}
-        onClose={() => setIsOpen("choose-address")}
-        onOpen={() => setIsOpen("delete")}
+        isOpen={searchParams.get("modal") === "delete"}
+        onClose={() => handleChangeDrawer("choose-address")}
+        onOpen={() => handleChangeDrawer("delete")}
         address={selectedAddress!}
         onConfirm={handleDeleteAddress}
       />
