@@ -11,6 +11,7 @@ import Radio from "@mui/material/Radio";
 import ChooseAddressSkeleton from "@/app/(main)/_components/car-owner-form/choose-address/ChooseAddressSkeleton";
 import DeleteAddressDrawer from "@/app/(main)/_components/car-owner-form/choose-address/DeleteAddressDrawer";
 import { IGetMyAddresses } from "@/services/api/common/types";
+import CustomDrawer from "@/components/custom-drawer/CustomDrawer";
 
 interface ChooseAddressProps {
   onSubmit: (addressId: string) => void;
@@ -55,7 +56,8 @@ const ChooseAddressDrawer: FC<ChooseAddressProps> = ({ onSubmit }) => {
         انتخاب از آدرس های من
       </CustomButton>
 
-      <SwipeableDrawer
+      <CustomDrawer
+        name={'choose-address'}
         anchor={"bottom"}
         open={isOpen === "choose-address"}
         onClose={() => setIsOpen(undefined)}
@@ -136,7 +138,7 @@ const ChooseAddressDrawer: FC<ChooseAddressProps> = ({ onSubmit }) => {
             </CustomButton>
           </Box>
         </Stack>
-      </SwipeableDrawer>
+      </CustomDrawer>
 
       <DeleteAddressDrawer
         isOpen={isOpen === "delete"}

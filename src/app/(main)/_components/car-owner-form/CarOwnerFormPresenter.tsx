@@ -8,6 +8,7 @@ import { Box, Stack, SwipeableDrawer } from "@mui/material";
 import CustomButton from "@/components/custom-button/CustomButton";
 import { useOrderCompletionMutation } from "@/services/api/common/hooks";
 import Typography from "@mui/material/Typography";
+import CustomDrawer from "@/components/custom-drawer/CustomDrawer";
 
 interface CarOwnerFormPresenterProps {}
 
@@ -45,8 +46,8 @@ const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
         تایید و ادامه
       </CustomButton>
 
-      <SwipeableDrawer
-        anchor={"bottom"}
+      <CustomDrawer
+        name={'try-again'}
         open={isOpen}
         onClose={() => setIsOpen(false)}
         onOpen={() => setIsOpen(true)}
@@ -74,12 +75,13 @@ const CarOwnerFormPresenter: FC<CarOwnerFormPresenterProps> = () => {
               color={"secondary"}
               variant={"outlined"}
               onClick={() => setIsOpen(false)}
+              disabled={isPending}
             >
               بازگشت
             </CustomButton>
           </Box>
         </Stack>
-      </SwipeableDrawer>
+      </CustomDrawer>
     </Stack>
   );
 };

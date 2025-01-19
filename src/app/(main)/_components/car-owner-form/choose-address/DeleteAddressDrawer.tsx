@@ -1,21 +1,30 @@
-import React, {FC} from 'react';
-import {Box, IconButton, Stack, SwipeableDrawer} from "@mui/material";
+import React, { FC } from "react";
+import { Box, IconButton, Stack, SwipeableDrawer } from "@mui/material";
 import Typography from "@mui/material/Typography";
 import SvgCloseIcon from "@/assets/icons/output/CloseIcon";
 import CustomButton from "@/components/custom-button/CustomButton";
-import {IGetMyAddresses} from "@/services/api/common/types";
+import { IGetMyAddresses } from "@/services/api/common/types";
+import CustomDrawer from "@/components/custom-drawer/CustomDrawer";
+import { useRouter } from "next/navigation";
 
 interface DeleteAddressDrawerProps {
   isOpen?: boolean;
-  onClose: () => void
-  onOpen: () => void
-  address?: IGetMyAddresses
-  onConfirm?: (addressId: string) => void
+  onClose: () => void;
+  onOpen: () => void;
+  address?: IGetMyAddresses;
+  onConfirm?: (addressId: string) => void;
 }
 
-const DeleteAddressDrawer: FC<DeleteAddressDrawerProps> = ({isOpen, onClose, onOpen, address, onConfirm}) => {
+const DeleteAddressDrawer: FC<DeleteAddressDrawerProps> = ({
+  isOpen,
+  onClose,
+  onOpen,
+  address,
+  onConfirm,
+}) => {
   return (
-    <SwipeableDrawer
+    <CustomDrawer
+      name={"delete-modal"}
       anchor={"bottom"}
       open={isOpen}
       onClose={onClose}
@@ -40,16 +49,26 @@ const DeleteAddressDrawer: FC<DeleteAddressDrawerProps> = ({isOpen, onClose, onO
         </Box>
 
         <Stack px={3} gap={4}>
-          <Typography fontSize={14} fontWeight={500}>آیا از حذف آدرس خود، مطمین هستید؟</Typography>
+          <Typography fontSize={14} fontWeight={500}>
+            آیا از حذف آدرس خود، مطمین هستید؟
+          </Typography>
 
-          <Stack gap={2} p={2} bgcolor={'#F2F2F2'}>
-            <Typography fontSize={14} fontWeight={500}>{address?.name}</Typography>
-            <Typography fontSize={12} fontWeight={400} color={'#757575'}>{address?.details}</Typography>
+          <Stack gap={2} p={2} bgcolor={"#F2F2F2"}>
+            <Typography fontSize={14} fontWeight={500}>
+              {address?.name}
+            </Typography>
+            <Typography fontSize={12} fontWeight={400} color={"#757575"}>
+              {address?.details}
+            </Typography>
           </Stack>
         </Stack>
 
-
-        <Box p={2.5} boxShadow={"0px 3px 15px 3px #2222221A"} display={'flex'} gap={2.5}>
+        <Box
+          p={2.5}
+          boxShadow={"0px 3px 15px 3px #2222221A"}
+          display={"flex"}
+          gap={2.5}
+        >
           <CustomButton
             fullWidth
             color={"secondary"}
@@ -61,14 +80,14 @@ const DeleteAddressDrawer: FC<DeleteAddressDrawerProps> = ({isOpen, onClose, onO
           <CustomButton
             fullWidth
             color={"secondary"}
-            variant={'outlined'}
+            variant={"outlined"}
             onClick={onClose}
           >
             بازگشت
           </CustomButton>
         </Box>
       </Stack>
-    </SwipeableDrawer>
+    </CustomDrawer>
   );
 };
 
